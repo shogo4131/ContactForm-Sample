@@ -1,11 +1,22 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form } from 'formik';
 
 import Layout from '../components/layout/layout';
+import ContactType from '../components/modules/ContactType';
+import SearchService from '../components/modules/SearchService';
+import CompanyForm from '../components/modules/CompanyForm';
+import NameForm from '../components/modules/NameForm';
+import MailForm from '../components/modules/MailForm';
+import AddressForm from '../components/modules/AddressForm';
+import ContentForm from '../components/modules/ContentForm';
+
 import styles from '../styles/form.module.css';
 import { validationSchema } from '../middleware/validate';
 
+/**
+ * 入力フォーム初期値
+ */
 const initialValues = {
   inquiryType: '',
   service: [],
@@ -16,16 +27,16 @@ const initialValues = {
   content: '',
 };
 
-const onSubmit = (values, { setSubmitting, resetForm }) => {
-  alert('送信が完了しました');
-  console.log(values);
-
-  resetForm();
-};
-
 const ContactForm: NextPage = () => {
   const title = 'サンプル株式会社';
   const description = 'サンプル株式会社のお問い合わせフォーム';
+
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
+    alert('送信が完了しました');
+    console.log(values);
+
+    resetForm();
+  };
 
   return (
     <Layout title={title} description={description}>
@@ -45,215 +56,25 @@ const ContactForm: NextPage = () => {
               </Head>
             )}
             <div className={styles.formFiled}>
-              <fieldset
-                aria-required="true"
-                aria-invalid={errors.inquiryType ? 'true' : 'false'}
-              >
-                <legend className={styles.formFieldName} id="labelInquiryType">
-                  お問い合わせ種別
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="inquiryType">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </legend>
-                <div className={styles.formFieldInput}>
-                  <ul role="radiogroup" aria-labelledby="labelInquiryType">
-                    <li>
-                      <Field
-                        name="inquiryType"
-                        id="inquiryType01"
-                        type="radio"
-                        value="見積もり依頼"
-                      />
-                      <label htmlFor="inquiryType01">見積もり依頼</label>
-                    </li>
-                    <li>
-                      <Field
-                        name="inquiryType"
-                        id="inquiryType02"
-                        type="radio"
-                        value="採用に関するお問い合わせ"
-                      />
-                      <label htmlFor="inquiryType02">試用版申込み</label>
-                    </li>
-                    <li>
-                      <Field
-                        name="inquiryType"
-                        id="inquiryType03"
-                        type="radio"
-                        value="その他"
-                      />
-                      <label htmlFor="inquiryType03">その他</label>
-                    </li>
-                  </ul>
-                </div>
-              </fieldset>
+              <ContactType errors={errors} />
             </div>
             <div className={styles.formField}>
-              <fieldset
-                aria-required="true"
-                aria-invalid={errors.service ? 'true' : 'false'}
-              >
-                <legend className={styles.formFieldName} id="labeService">
-                  検討中のサービス
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="service">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </legend>
-                <div className={styles.formFieldInput}>
-                  <ul role="group" aria-labelledby="labeService">
-                    <li>
-                      <Field
-                        name="service"
-                        id="service01"
-                        type="checkbox"
-                        value="サービスA"
-                      />
-                      <label htmlFor="service01">サービスA</label>
-                    </li>
-                    <li>
-                      <Field
-                        name="service"
-                        id="service02"
-                        type="checkbox"
-                        value="サービスB"
-                      />
-                      <label htmlFor="service02">サービスB</label>
-                    </li>
-                    <li>
-                      <Field
-                        name="service"
-                        id="service03"
-                        type="checkbox"
-                        value="サービスC"
-                      />
-                      <label htmlFor="service03">サービスC</label>
-                    </li>
-                  </ul>
-                </div>
-              </fieldset>
+              <SearchService errors={errors} />
             </div>
             <div className={styles.formField}>
-              <div className={styles.formFieldName}>
-                <label htmlFor="company">
-                  御社名
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="company">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className={styles.formFieldInput}>
-                <Field
-                  name="company"
-                  id="company"
-                  type="text"
-                  placeholder="会社名や団体名をご記入ください"
-                  aria-required="true"
-                  aria-invalid={errors.company ? 'true' : 'false'}
-                />
-              </div>
+              <CompanyForm errors={errors} />
             </div>
             <div className={styles.formField}>
-              <div className={styles.formFieldName}>
-                <label htmlFor="name">
-                  ご担当者名
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="name">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className={styles.formFieldInput}>
-                <Field
-                  name="name"
-                  id="name"
-                  type="text"
-                  placeholder="ご担当者様のお名前をご記入ください"
-                  aria-required="true"
-                  aria-invalid={errors.name ? 'true' : 'false'}
-                />
-              </div>
+              <NameForm errors={errors} />
             </div>
             <div className={styles.formField}>
-              <div className={styles.formFieldName}>
-                <label htmlFor="email">
-                  メールアドレス
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="email">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className={styles.formFieldInput}>
-                <Field
-                  name="email"
-                  id="email"
-                  type="email"
-                  placeholder="メールアドレスを正しくご記入ください"
-                  aria-required="true"
-                  aria-invalid={errors.email ? 'true' : 'false'}
-                />
-              </div>
+              <MailForm errors={errors} />
             </div>
             <div className={styles.formField}>
-              <div className={styles.formFieldName}>
-                <label htmlFor="address">会社住所</label>
-              </div>
-              <div className={styles.formFieldInput}>
-                <Field
-                  name="address"
-                  id="address"
-                  component="textarea"
-                  placeholder="住所をご記入ください"
-                />
-              </div>
+              <AddressForm errors={errors} />
             </div>
             <div className={styles.formField}>
-              <div className={styles.formFieldName}>
-                <label htmlFor="content">
-                  お問い合わせ内容
-                  <span className={styles.formInputRequisite}>必須</span>
-                  <ErrorMessage name="content">
-                    {(msg) => (
-                      <span className={styles.invalidForm} aria-live="polite">
-                        {msg}
-                      </span>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className={styles.formFieldInput}>
-                <Field
-                  name="content"
-                  id="content"
-                  component="textarea"
-                  placeholder="お問い合わせ内容をご記入ください"
-                  aria-required="true"
-                  aria-invalid={errors.content ? 'true' : 'false'}
-                />
-              </div>
+              <ContentForm errors={errors} />
             </div>
             <div className={styles.formSubmit}>
               <button
