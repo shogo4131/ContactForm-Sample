@@ -1,12 +1,23 @@
 import * as Yup from 'yup';
 
+import {
+  INQUIRY_TYPE_ERROR,
+  SERVICE_TYPE_ERROR,
+  NAME_ERROR,
+  COMPANY_ERROR,
+  EMAIL_TYPE_ERROR,
+  EMAIL_ERROR,
+  CONTENT_ERROR,
+} from '../constants/validate.error';
+
+/**
+ * バリデーションタイプ設定
+ */
 export const validationSchema = Yup.object({
-  inquiryType: Yup.string().required('お問い合わせ種別を選択してください'),
-  service: Yup.array().min(1, '検討中のサービスを1つ以上選択してください'),
-  name: Yup.string().required('ご担当者名は必須です'),
-  company: Yup.string().required('御社名は必須です'),
-  email: Yup.string()
-    .email('メールアドレスの形式に誤りがあります')
-    .required('メールアドレスは必須です'),
-  content: Yup.string().required('お問い合わせ内容は必須です'),
+  inquiryType: Yup.string().required(INQUIRY_TYPE_ERROR),
+  service: Yup.array().min(1, SERVICE_TYPE_ERROR),
+  name: Yup.string().required(NAME_ERROR),
+  company: Yup.string().required(COMPANY_ERROR),
+  email: Yup.string().email(EMAIL_TYPE_ERROR).required(EMAIL_ERROR),
+  content: Yup.string().required(CONTENT_ERROR),
 });
