@@ -1,28 +1,19 @@
 import React from 'react';
-import { ErrorMessage, Field, FormikErrors } from 'formik';
+import { Field } from 'formik';
+
+import ValidateErrorMessage from '../../atoms/ValidateErrorMessage';
 
 import styles from '../../../styles/form.module.css';
-import { ValidationError } from '../../../types/validate.error';
-
-interface Props {
-  errors: FormikErrors<ValidationError>;
-}
 
 // eslint-disable-next-line react/display-name
-const NameForm: React.VFC<Props> = React.memo(({ errors }) => {
+const NameForm = React.memo(() => {
   return (
     <>
       <div className={styles.formFieldName}>
         <label htmlFor="name">
           ご担当者名
           <span className={styles.formInputRequisite}>必須</span>
-          <ErrorMessage name="name">
-            {(msg) => (
-              <span className={styles.invalidForm} aria-live="polite">
-                {msg}
-              </span>
-            )}
-          </ErrorMessage>
+          <ValidateErrorMessage name="name" />
         </label>
       </div>
       <div className={styles.formFieldInput}>
@@ -31,8 +22,6 @@ const NameForm: React.VFC<Props> = React.memo(({ errors }) => {
           id="name"
           type="text"
           placeholder="ご担当者様のお名前をご記入ください"
-          aria-required="true"
-          aria-invalid={errors.name ? 'true' : 'false'}
         />
       </div>
     </>

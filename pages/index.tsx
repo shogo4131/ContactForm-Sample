@@ -28,6 +28,9 @@ const initialValues = {
   content: '',
 };
 
+/**
+ * お問い合わせページ
+ */
 const ContactForm: NextPage = () => {
   const title = 'サンプル株式会社';
   const description = 'サンプル株式会社のお問い合わせフォーム';
@@ -63,19 +66,19 @@ const ContactForm: NextPage = () => {
               <SearchService errors={errors} />
             </div>
             <div className={styles.formField}>
-              <CompanyForm errors={errors} />
+              <CompanyForm />
             </div>
             <div className={styles.formField}>
-              <NameForm errors={errors} />
+              <NameForm />
             </div>
             <div className={styles.formField}>
-              <MailForm errors={errors} />
+              <MailForm />
             </div>
             <div className={styles.formField}>
               <AddressForm />
             </div>
             <div className={styles.formField}>
-              <ContentForm errors={errors} />
+              <ContentForm />
             </div>
             <div className={styles.formSubmit}>
               <ConfirmButton

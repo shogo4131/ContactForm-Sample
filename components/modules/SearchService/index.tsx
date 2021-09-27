@@ -1,5 +1,7 @@
 import React from 'react';
-import { ErrorMessage, Field, FormikErrors } from 'formik';
+import { Field, FormikErrors } from 'formik';
+
+import ValidateErrorMessage from '../../atoms/ValidateErrorMessage';
 
 import styles from '../../../styles/form.module.css';
 
@@ -19,13 +21,7 @@ const SearchService: React.VFC<Props> = React.memo(({ errors }) => {
       <legend className={styles.formFieldName} id="labeService">
         検討中のサービス
         <span className={styles.formInputRequisite}>必須</span>
-        <ErrorMessage name="service">
-          {(msg) => (
-            <span className={styles.invalidForm} aria-live="polite">
-              {msg}
-            </span>
-          )}
-        </ErrorMessage>
+        <ValidateErrorMessage name="service" />
       </legend>
       <div className={styles.formFieldInput}>
         <ul role="group" aria-labelledby="labeService">

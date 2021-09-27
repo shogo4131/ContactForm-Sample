@@ -1,28 +1,19 @@
 import React from 'react';
-import { ErrorMessage, Field, FormikErrors } from 'formik';
+import { Field } from 'formik';
+
+import ValidateErrorMessage from '../../atoms/ValidateErrorMessage';
 
 import styles from '../../../styles/form.module.css';
-import { ValidationError } from '../../../types/validate.error';
-
-interface Props {
-  errors: FormikErrors<ValidationError>;
-}
 
 // eslint-disable-next-line react/display-name
-const MailForm: React.VFC<Props> = React.memo(({ errors }) => {
+const MailForm = React.memo(() => {
   return (
     <>
       <div className={styles.formFieldName}>
         <label htmlFor="email">
           メールアドレス
           <span className={styles.formInputRequisite}>必須</span>
-          <ErrorMessage name="email">
-            {(msg) => (
-              <span className={styles.invalidForm} aria-live="polite">
-                {msg}
-              </span>
-            )}
-          </ErrorMessage>
+          <ValidateErrorMessage name="email" />
         </label>
       </div>
       <div className={styles.formFieldInput}>
@@ -31,8 +22,6 @@ const MailForm: React.VFC<Props> = React.memo(({ errors }) => {
           id="email"
           type="email"
           placeholder="メールアドレスを正しくご記入ください"
-          aria-required="true"
-          aria-invalid={errors.email ? 'true' : 'false'}
         />
       </div>
     </>
