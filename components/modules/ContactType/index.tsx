@@ -1,7 +1,10 @@
 import React from 'react';
-import { ErrorMessage, Field, FormikErrors } from 'formik';
+import { Field, FormikErrors } from 'formik';
+
+import ValidateErrorMessage from '../../atoms/ValidateErrorMessage';
 
 import styles from '../../../styles/form.module.css';
+
 import { ValidationError } from '../../../types/validate.error';
 
 interface Props {
@@ -18,13 +21,7 @@ const ContactType: React.VFC<Props> = React.memo(({ errors }) => {
       <legend className={styles.formFieldName} id="labelInquiryType">
         お問い合わせ種別
         <span className={styles.formInputRequisite}>必須</span>
-        <ErrorMessage name="inquiryType">
-          {(msg) => (
-            <span className={styles.invalidForm} aria-live="polite">
-              {msg}
-            </span>
-          )}
-        </ErrorMessage>
+        <ValidateErrorMessage name="inquiryType" />
       </legend>
       <div className={styles.formFieldInput}>
         <ul role="radiogroup" aria-labelledby="labelInquiryType">
