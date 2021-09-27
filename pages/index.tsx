@@ -10,6 +10,7 @@ import NameForm from '../components/modules/NameForm';
 import MailForm from '../components/modules/MailForm';
 import AddressForm from '../components/modules/AddressForm';
 import ContentForm from '../components/modules/ContentForm';
+import ConfirmButton from '../components/atoms/ConfirmButton';
 
 import styles from '../styles/form.module.css';
 import { validationSchema } from '../middleware/validate';
@@ -71,20 +72,18 @@ const ContactForm: NextPage = () => {
               <MailForm errors={errors} />
             </div>
             <div className={styles.formField}>
-              <AddressForm errors={errors} />
+              <AddressForm />
             </div>
             <div className={styles.formField}>
               <ContentForm errors={errors} />
             </div>
             <div className={styles.formSubmit}>
-              <button
-                disabled={isSubmitting}
+              <ConfirmButton
+                isSubmitting={isSubmitting}
                 type="submit"
                 id="submit"
                 title="入力内容を送信します"
-              >
-                入力内容の送信
-              </button>
+              />
             </div>
           </Form>
         )}

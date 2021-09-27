@@ -1,10 +1,15 @@
 import React from 'react';
-import { ErrorMessage, Field } from 'formik';
+import { ErrorMessage, Field, FormikErrors } from 'formik';
 
 import styles from '../../../styles/form.module.css';
+import { ValidationError } from '../../../types/validate.error';
+
+interface Props {
+  errors: FormikErrors<ValidationError>;
+}
 
 // eslint-disable-next-line react/display-name
-const NameForm = React.memo(({ errors }) => {
+const NameForm: React.VFC<Props> = React.memo(({ errors }) => {
   return (
     <>
       <div className={styles.formFieldName}>

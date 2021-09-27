@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import styles from '../../../styles/form.module.css';
 
 // eslint-disable-next-line react/display-name
-const AddressForm = React.memo(({ errors }) => {
+const AddressForm = React.memo(() => {
   return (
     <>
       <div className={styles.formFieldName}>
